@@ -5,7 +5,7 @@ import {
   FaMobileAlt,
   FaPhoneAlt,
 } from "react-icons/fa";
-import logo from "../../../../public/logo/logo2.png";
+import logo from "../../../assets/logo/logo2.png";
 import { HiMail } from "react-icons/hi";
 const Footer = () => {
   return (
