@@ -4,17 +4,19 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PageTitle from "../../Components/PageTitle";
 import SocialLogin from "../../Components/SocialLogin";
+import useAuth from "../../hook/useAuth";
 
 
 const Login = () => {
+    const { signIn } = useAuth();
     const [error, setError] = useState('');
     const { register, handleSubmit, reset } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
 
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    // const from = location.state?.from?.pathname || '/';
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     // console.log(from);
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -24,21 +26,20 @@ const Login = () => {
     const onSubmit = (data) => {
         // event.preventDefault();
         // console.log(data);
-        // signIn(data.email, data.password)
-        //     .then((result) => {
-        //         setError('');
-        //         // Signed in 
-        //         const loggedUser = result.user;
-        //         console.log('User:', loggedUser);
-        //         reset();
-        //         navigate(from, { replace: true });
-        //     })
-        //     .catch((error) => {
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
-        //         setError(errorMessage, errorCode)
-        //     });
-        console.log(data)
+        signIn(data.email, data.password)
+            .then((result) => {
+                setError('');
+                // Signed in 
+                const loggedUser = result.user;
+                console.log('User:', loggedUser);
+                reset();
+                navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage, errorCode)
+            });
     }
     return (
         <div>
