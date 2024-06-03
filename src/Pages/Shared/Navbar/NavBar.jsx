@@ -3,7 +3,7 @@ import logo from "../../../assets/logo/logo2.png";
 import React from "react";
 const NavBar = () => {
   const isAdmin = true;
-  const user = true;
+  const user = false;
 
   const navOptions = (
     <>
