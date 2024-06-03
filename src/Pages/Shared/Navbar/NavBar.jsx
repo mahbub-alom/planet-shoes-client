@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../../../public/logo/logo.png";
+import logo from "../../../../public/logo/logo2.png";
 import React from "react";
 const NavBar = () => {
   const isAdmin = true;
