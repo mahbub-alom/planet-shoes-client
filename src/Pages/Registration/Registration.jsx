@@ -9,51 +9,55 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Registration = () => {
   const navigate = useNavigate();
-    const [error, setError] = useState('');
-    const { createUser, updateUserProfile } = useAuth();
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
-        createUser(data.email, data.password)
-            .then((result) => {
-                setError('');
-                // Signed in 
-                const user = result.user;
-                console.log(user);
-                // updateUserProfile(data.name, data.photoURL)
-                //     .then(() => {
-                //         console.log('Profile updated');
-                //         const saveUser = { name: data.name, email: data.email, image: data.photoURL, role: 'student' }
-                //         fetch('https://assignment-twelve-server-smoky.vercel.app/newUser', {
-                //             method: 'POST',
-                //             headers: {
-                //                 'content-type': 'application/json'
-                //             },
-                //             body: JSON.stringify(saveUser)
-                //         })
-                //             .then(res => res.json())
-                //             .then(data => {
-                //                 console.log("account created");
-                //                 if (data.insertedId) {
-                //                     navigate('/')
-                //                 }
-                //             })
-                //     }).catch((error) => {
-                //         setError(error)
-                //     });
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                setError(errorMessage, errorCode)
-            });
-    };
-    const password = watch("password");
+  const [error, setError] = useState('');
+  const { createUser, updateUserProfile } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    createUser(data.email, data.password)
+      .then((result) => {
+        setError('');
+        // Signed in 
+        const user = result.user;
+        console.log(user);
+        // updateUserProfile(data.name, data.photoURL)
+        //     .then(() => {
+        //         console.log('Profile updated');
+        //         const saveUser = { name: data.name, email: data.email, image: data.photoURL, role: 'student' }
+        //         fetch('https://assignment-twelve-server-smoky.vercel.app/newUser', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'content-type': 'application/json'
+        //             },
+        //             body: JSON.stringify(saveUser)
+        //         })
+        //             .then(res => res.json())
+        //             .then(data => {
+        //                 console.log("account created");
+        //                 if (data.insertedId) {
+        //                     navigate('/')
+        //                 }
+        //             })
+        //     }).catch((error) => {
+        //         setError(error)
+        //     });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage, errorCode)
+      });
+  };
+  const password = watch("password");
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <div>
