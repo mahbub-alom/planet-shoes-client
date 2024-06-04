@@ -10,6 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import axios from "axios";
 // import axios from "axios";
 
 const auth = getAuth(app);
@@ -55,20 +56,21 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
       console.log(currentUser);
-      // if (currentUser) {
-      //     axios.post('https://assignment-twelve-server-smoky.vercel.app/jwt', { email: currentUser.email })
-      //         .then(data => {
-      //             localStorage.setItem('access-token', data.data.token);
-      //             setLoading(false);
-      //         })
-      //         .catch(error => {
-      //             console.error('Failed to get JWT token:', error);
-      //             setLoading(false);
-      //         });
-      // } else {
-      //     localStorage.removeItem('access-token');
-      //     setLoading(false);
-      // }
+      const userData = { email: currentUser?.email }
+      if (currentUser) {
+        axios.post('http://localhost:5000/jwt', userData)
+          .then(data => {
+            localStorage.setItem('access-token', data.data.token);
+            setLoading(false);
+          })
+          .catch(error => {
+            console.error('Failed to get JWT token:', error);
+            setLoading(false);
+          });
+      } else {
+        localStorage.removeItem('access-token');
+        setLoading(false);
+      }
     });
 
     return () => unsubscribe();

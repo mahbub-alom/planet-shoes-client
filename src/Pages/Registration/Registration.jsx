@@ -6,12 +6,13 @@ import PageTitle from "../../Components/PageTitle";
 import SocialLogin from "../../Components/SocialLogin";
 import useAuth from "../../hook/useAuth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from "axios";
 
 const Registration = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
-  const { createUser, updateUserProfile } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const { createUser, updateUserProfile } = useAuth();
   const {
     register,
     handleSubmit,
@@ -25,27 +26,18 @@ const Registration = () => {
         // Signed in 
         const user = result.user;
         console.log(user);
-        // updateUserProfile(data.name, data.photoURL)
-        //     .then(() => {
-        //         console.log('Profile updated');
-        //         const saveUser = { name: data.name, email: data.email, image: data.photoURL, role: 'student' }
-        //         fetch('https://assignment-twelve-server-smoky.vercel.app/newUser', {
-        //             method: 'POST',
-        //             headers: {
-        //                 'content-type': 'application/json'
-        //             },
-        //             body: JSON.stringify(saveUser)
-        //         })
-        //             .then(res => res.json())
-        //             .then(data => {
-        //                 console.log("account created");
-        //                 if (data.insertedId) {
-        //                     navigate('/')
-        //                 }
-        //             })
-        //     }).catch((error) => {
-        //         setError(error)
-        //     });
+        updateUserProfile(data?.name, data?.photoURL)
+          .then(() => {
+            const saveUser = { name: data.name, email: data.email, image: data.photoURL }
+            axios.post('http://localhost:5000/newUser', saveUser)
+              .then(data => {
+                if (data?.data?.insertedId) {
+                  navigate('/')
+                }
+              })
+          }).catch((error) => {
+            setError(error)
+          });
       })
       .catch((error) => {
         const errorCode = error.code;
