@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo/logo2.png";
 import React from "react";
+import useAuth from "../../../hook/useAuth";
 const NavBar = () => {
-  const isAdmin = true;
-  const user = false;
+  const { user ,logOut} = useAuth();
 
   const navOptions = (
     <>
@@ -16,11 +16,6 @@ const NavBar = () => {
       <li>
         <Link to="/instructors">Instructors</Link>
       </li>
-      {isAdmin && (
-        <li>
-          <Link to="/dashboard/manageclasses">Dashboard</Link>
-        </li>
-      )}
     </>
   );
   const siteName = (
@@ -30,13 +25,13 @@ const NavBar = () => {
   );
 
   const handleLogOut = () => {
-    //   logOut()
-    //     .then(() => {
-    //       console.log("successfully logged out");
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
+      logOut()
+        .then(() => {
+          console.log("successfully logged out");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   };
 
   return (
