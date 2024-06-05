@@ -26,7 +26,9 @@ const UserInfo = () => {
     if (isPending) {
         return <LoadingSpinner />
     }
-    console.log(singleUser)
+    const handleChangePass = () => {
+
+    }
     return (
 
         <div className="overflow-x-auto w-full">
@@ -42,6 +44,7 @@ const UserInfo = () => {
                         <th>Email</th>
                         <th>Address</th>
                         <th>Phone</th>
+                        <th>Action</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -69,6 +72,11 @@ const UserInfo = () => {
                         <td>
                             <Link to={`/dashboard/updateUserInfo/${user?._id}`}>
                                 <Btn btnText={"Update"}></Btn>
+                            </Link>
+                        </td>
+                        <td>
+                            <Link>
+                                <Btn btnText={"Change Password"}></Btn>
                             </Link>
                         </td>
                     </tr>)}

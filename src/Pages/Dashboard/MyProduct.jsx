@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import useAuth from '../../hook/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import { Zoom } from 'react-awesome-reveal';
@@ -8,19 +8,10 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const MyProduct = () => {
-    // const [product, setProduct] = useState([])
+    const [searchText, setSearchText] = useState("");
+    const [product,setProduct]=useState([])
     const { user } = useAuth();
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:5000/getproduct?email=${user?.email}`, {
-    //         headers: {
-    //             authorization: `Bearer ${localStorage.getItem("access-token")}`
-    //         }
-    //     })
-    //         .then(data => {
-    //             setProduct(data.data)
-    //         })
-    // }, [user?.email])
 
     const { isPending, data: singleData = [], refetch } = useQuery({
         queryKey: ['singleData'],
@@ -32,7 +23,9 @@ const MyProduct = () => {
                     }
                 }
             )
-            return res.data
+            setProduct(singleData)
+            return res.data;
+            
         }
     })
     if (isPending) {
@@ -69,7 +62,12 @@ const MyProduct = () => {
         });
     }
 
-
+    const handleSearch = () => {
+        axios.get(`http://localhost:5000/searchProduct/${searchText}`)
+            .then(data => {
+                setProduct(data.data)
+            })
+    };
 
 
     return (
@@ -79,6 +77,16 @@ const MyProduct = () => {
             <Zoom>
                 <h1 className="text-2xl font-semibold text-center my-4 text-fuchsia-500">My Product</h1>
             </Zoom>
+            <div className=" flex gap-2 mb-3 justify-center search-box p-2 text-center">
+                <input
+                    onChange={(e) => setSearchText(e.target.value)}
+                    type="text"
+                    className="p-1 rounded border-2 border-black"
+                />
+                <button onClick={handleSearch} className="btn btn-primary">Search</button>
+            </div>
+
+
             <table className="table">
                 {/* head */}
                 <thead>
@@ -95,7 +103,7 @@ const MyProduct = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {singleData.map((item, index) => <tr key={item._id}>
+                    {product?.map((item, index) => <tr key={item._id}>
                         <th>
                             {index + 1}
                         </th>
@@ -115,7 +123,6 @@ const MyProduct = () => {
                         <td>{item?.sellerEmail}</td>
                         <td>${item?.price}</td>
                         <td>{item?.discount}%</td>
-                        <td>{item?._id}</td>
                         <th className='flex gap-2 items-center'>
                             <Link to={`/dashboard/updateproduct/${item?._id}`}>
                                 <button className="btn btn-primary ">Edit</button>

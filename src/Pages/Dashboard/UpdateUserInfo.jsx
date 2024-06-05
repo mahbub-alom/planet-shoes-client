@@ -4,7 +4,6 @@ import { Zoom } from 'react-awesome-reveal';
 import { useForm } from 'react-hook-form';
 import { useLoaderData, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import useAuth from '../../hook/useAuth';
 
 const UpdateUserInfo = () => {
     const datas = useLoaderData()
