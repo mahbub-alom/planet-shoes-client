@@ -6,6 +6,7 @@ import Registration from "../Pages/Registration/Registration";
 import Dashboard from "../Layout/Dashboard";
 import AddProducts from "../Pages/Dashboard/AddProducts";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
+import MyProduct from "../Pages/Dashboard/MyProduct";
 
 const router = createBrowserRouter([
   {
@@ -30,11 +31,15 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <Dashboard />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "addproduct",
         element: <AddProducts />
+      },
+      {
+        path: "myproduct",
+        element: <MyProduct />
       }
     ]
   }
