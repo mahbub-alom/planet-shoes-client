@@ -26,7 +26,7 @@ const UserInfo = () => {
     if (isPending) {
         return <LoadingSpinner />
     }
-
+    console.log(singleUser)
     return (
 
         <div className="overflow-x-auto w-full">
@@ -40,6 +40,9 @@ const UserInfo = () => {
                         <th>Image</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,6 +64,8 @@ const UserInfo = () => {
                             {user?.name}
                         </td>
                         <td>{user?.email}</td>
+                        <td>{user?.userAddress && user?.userAddress}</td>
+                        <td>{user?.userPhone && user?.userPhone}</td>
                         <td>
                             <Link to={`/dashboard/updateUserInfo/${user?._id}`}>
                                 <Btn btnText={"Update"}></Btn>
@@ -73,7 +78,7 @@ const UserInfo = () => {
 
 
             </table>
-        </div>
+        </div >
 
     );
 };
