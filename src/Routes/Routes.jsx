@@ -4,34 +4,37 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Registration from "../Pages/Registration/Registration";
 import Dashboard from "../Layout/Dashboard";
-import AddProducts from "./AddProducts";
+import AddProducts from "../Pages/Dashboard/AddProducts";
+import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
         element: <Home />,
       },
       {
-        path:"/login",
-        element:<Login/>
+        path: "/login",
+        element: <Login />
       },
       {
-        path:"/registration",
-        element:<Registration/>
+        path: "/registration",
+        element: <Registration />
       }
     ],
   },
   {
-    path:"dashboard",
-    element:<Dashboard/>,
-    children:[
+    path: "dashboard",
+    element: <Dashboard />,
+    errorElement:<ErrorPage/>,
+    children: [
       {
-        path:"addproduct",
-        element:<AddProducts/>
+        path: "addproduct",
+        element: <AddProducts />
       }
     ]
   }
