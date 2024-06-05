@@ -77,7 +77,7 @@ const AddProducts = () => {
     return (
         <>
             <Zoom>
-                <h1 className="text-2xl font-semibold ">Add A New Product</h1>
+                <h1 className="text-2xl font-semibold text-fuchsia-500">Add A New Product</h1>
             </Zoom>
             <div className="w-full mx-auto my-10">
                 <form
