@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Zoom } from 'react-awesome-reveal';
 import LoadingSpinner from '../Shared/LoadingSpinner/LoadingSpinner';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const MyProduct = () => {
     // const [product, setProduct] = useState([])
@@ -38,9 +39,37 @@ const MyProduct = () => {
         return <LoadingSpinner />
     }
 
-    const handleDelete = (id) => {
-        console.log(id)
+    const handleDelete = (item) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:5000/deleteproduct/${item?._id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem("access-token")}`
+                    }
+                })
+                    .then(data => {
+                        if (data.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                        refetch()
+                    })
+            }
+        });
     }
+
+
 
 
     return (
@@ -93,7 +122,7 @@ const MyProduct = () => {
                             </Link>
 
                             <button
-                                onClick={() => handleDelete(item?._id)}
+                                onClick={() => handleDelete(item)}
                                 className="btn btn-error"
                             >
                                 Delete
