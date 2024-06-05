@@ -21,7 +21,7 @@ const MyProduct = () => {
     //         })
     // }, [user?.email])
 
-    const { isPending, data: singleData = [] } = useQuery({
+    const { isPending, data: singleData = [], refetch } = useQuery({
         queryKey: ['singleData'],
         queryFn: async () => {
             const res = await axios.get(`http://localhost:5000/getproduct?email=${user?.email}`,
@@ -37,6 +37,11 @@ const MyProduct = () => {
     if (isPending) {
         return <LoadingSpinner />
     }
+
+    const handleDelete = (id) => {
+        console.log(id)
+    }
+
 
     return (
 
@@ -81,13 +86,14 @@ const MyProduct = () => {
                         <td>{item?.sellerEmail}</td>
                         <td>${item?.price}</td>
                         <td>{item?.discount}%</td>
+                        <td>{item?._id}</td>
                         <th className='flex gap-2 items-center'>
-                            <Link to={`/dashboard/EditProduct/${item?._id}`}>
+                            <Link to={`/dashboard/updateproduct/${item?._id}`}>
                                 <button className="btn btn-primary ">Edit</button>
                             </Link>
 
                             <button
-                                // onClick={() => handleDelete(item?.id)}
+                                onClick={() => handleDelete(item?._id)}
                                 className="btn btn-error"
                             >
                                 Delete

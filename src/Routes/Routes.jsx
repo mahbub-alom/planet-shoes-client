@@ -7,6 +7,7 @@ import Dashboard from "../Layout/Dashboard";
 import AddProducts from "../Pages/Dashboard/AddProducts";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
 import MyProduct from "../Pages/Dashboard/MyProduct";
+import UpdateProduct from "../Pages/Dashboard/UpdateProduct";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
       {
         path: "myproduct",
         element: <MyProduct />
+      },
+      {
+        path:"updateproduct/:id",
+        element:<UpdateProduct/>,
+        loader:({params})=>fetch(`http://localhost:5000/updateGetProduct/${params.id}`)
       }
     ]
   }

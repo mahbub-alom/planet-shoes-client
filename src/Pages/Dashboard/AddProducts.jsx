@@ -37,7 +37,7 @@ const AddProducts = () => {
                             const productData = {
                                 productName: data.productName,
                                 prodcutImage: imgURL,
-                                sellerName: user?.displayName,
+                                sellerName: data?.displayName,
                                 sellerEmail: user?.email,
                                 availableProduct: parseInt(data.availableProduct),
                                 price: parseInt(data.price),
@@ -112,8 +112,8 @@ const AddProducts = () => {
                             </label>
                             <input
                                 type="text"
-                                value={user?.displayName}
-                                readOnly
+                                {...register("sellerName", { required: true })}
+                                placeholder='Seller Name'
                                 className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             />
                         </div>
@@ -133,11 +133,11 @@ const AddProducts = () => {
                     <div className="md:flex gap-4">
                         <div className="mb-4 md:w-1/2">
                             <label className="text-gray-700 font-semibold">
-                                Available:
+                                Available Quantity:
                             </label>
                             <input
                                 type="number"
-                                placeholder='Available Product'
+                                placeholder='Available Quantity'
                                 {...register("availableProduct", { required: true })}
                                 className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             />
