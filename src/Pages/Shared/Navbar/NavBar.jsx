@@ -3,7 +3,7 @@ import logo from "../../../assets/logo/logo2.png";
 import React from "react";
 import useAuth from "../../../hook/useAuth";
 const NavBar = () => {
-  const { user ,logOut} = useAuth();
+  const { user, logOut } = useAuth();
 
   const navOptions = (
     <>
@@ -11,10 +11,13 @@ const NavBar = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/Allclasseshere">Classes</Link>
+        <Link to="/shop">Shop</Link>
       </li>
       <li>
-        <Link to="/instructors">Instructors</Link>
+        <Link to="/cart">Cart</Link>
+      </li>
+      <li>
+        <Link to="/cart">Contact us</Link>
       </li>
       <li>
         <Link to="/dashboard">Dashboard</Link>
@@ -28,13 +31,13 @@ const NavBar = () => {
   );
 
   const handleLogOut = () => {
-      logOut()
-        .then(() => {
-          console.log("successfully logged out");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    logOut()
+      .then(() => {
+        console.log("successfully logged out");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

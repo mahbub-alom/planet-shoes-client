@@ -10,6 +10,7 @@ import MyProduct from "../Pages/Dashboard/MyProduct";
 import UpdateProduct from "../Pages/Dashboard/UpdateProduct";
 import UserInfo from "../Pages/Dashboard/UserInfo";
 import UpdateUserInfo from "../Pages/Dashboard/UpdateUserInfo";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
     errorElement: <ErrorPage />,
     children: [
       {
