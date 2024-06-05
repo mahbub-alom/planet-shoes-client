@@ -20,7 +20,7 @@ const Dashboard = () => {
                     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                         {/* Sidebar content here */}
                         <li className="text-xl font-semibold text-fuchsia-500">
-                            <NavLink to="/dashboard/users">
+                            <NavLink to="/dashboard/userInfo">
                                 <FaUsers />
                                 User info
                             </NavLink>
@@ -38,9 +38,9 @@ const Dashboard = () => {
                             </NavLink>
                         </li>
                         <li className="text-xl font-semibold text-fuchsia-500">
-                            <NavLink to="/dashboard/EditProduct">
+                            <NavLink to="/dashboard/updateproduct">
                                 <CiEdit />
-                                Edit Product
+                                Update Product
                             </NavLink>
                         </li>
                         <div className="divider"></div>

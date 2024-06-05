@@ -8,6 +8,8 @@ import AddProducts from "../Pages/Dashboard/AddProducts";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
 import MyProduct from "../Pages/Dashboard/MyProduct";
 import UpdateProduct from "../Pages/Dashboard/UpdateProduct";
+import UserInfo from "../Pages/Dashboard/UserInfo";
+import UpdateUserInfo from "../Pages/Dashboard/UpdateUserInfo";
 
 const router = createBrowserRouter([
   {
@@ -43,9 +45,17 @@ const router = createBrowserRouter([
         element: <MyProduct />
       },
       {
-        path:"updateproduct/:id",
-        element:<UpdateProduct/>,
-        loader:({params})=>fetch(`http://localhost:5000/updateGetProduct/${params.id}`)
+        path: "updateproduct/:id",
+        element: <UpdateProduct />,
+        loader: ({ params }) => fetch(`http://localhost:5000/updateGetProduct/${params.id}`)
+      },
+      {
+        path: "userInfo",
+        element: <UserInfo />
+      }, {
+        path: "updateUserInfo/:id",
+        element: <UpdateUserInfo />,
+        loader: ({ params }) => fetch(`http://localhost:5000/updateUserInfo/${params.id}`)
       }
     ]
   }
