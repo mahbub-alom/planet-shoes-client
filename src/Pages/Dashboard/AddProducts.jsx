@@ -3,6 +3,7 @@ import useAuth from '../../hook/useAuth';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { Zoom } from 'react-awesome-reveal';
+import axios from 'axios';
 
 const img_hosting_token = import.meta.env.VITE_IMGBB_KEY;
 
@@ -33,15 +34,17 @@ const AddProducts = () => {
                         // console.log(imgResponse);
                         if (imgResponse.success) {
                             const imgURL = imgResponse.data.display_url;
-                            const classData = {
+                            const productData = {
                                 productName: data.productName,
                                 prodcutImage: imgURL,
                                 sellerName: user?.displayName,
                                 sellerEmail: user?.email,
-                                availableProduct: data.availableProduct,
-                                price: data.price,
+                                availableProduct: parseInt(data.availableProduct),
+                                price: parseInt(data.price),
+                                description: data.description,
+                                discount: parseInt(data.discount)
                             };
-                            // handleSwalFireWithUpdate(classData);
+                            handleSwalFireWithUpdate(productData);
                         }
                     })
                     .catch((err) => {
@@ -51,31 +54,25 @@ const AddProducts = () => {
         });
     };
 
-    // const handleSwalFireWithUpdate = (classData) => {
-    //   const token = localStorage.getItem("access-token");
-
-    //   fetch("https://cricket-starts-server.vercel.app/classes", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //     body: JSON.stringify(classData),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       // console.log(data);
-    //       if (data.insertedId) {
-    //         reset();
-    //         Swal.fire(
-    //           `${classData.className} Added Successfully!`,
-    //           "Your class has been added.",
-    //           "success"
-    //         );
-    //       }
-    //     })
-    //     .catch((err) => console.log(err));
-    // };
+    const handleSwalFireWithUpdate = (productData) => {
+        axios.post("http://localhost:5000/addproduct", productData, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("access-token")}`
+            }
+        })
+            .then((data) => {
+                // console.log(data);
+                if (data.data.insertedId) {
+                    reset();
+                    Swal.fire(
+                        `${productData.productName} Added Successfully!`,
+                        "Your Product has been added.",
+                        "success"
+                    );
+                }
+            })
+            .catch((err) => console.log(err));
+    };
 
     return (
         <>
@@ -93,6 +90,7 @@ const AddProducts = () => {
                             <input
                                 type="text"
                                 {...register("productName", { required: true })}
+                                placeholder='Product Name'
                                 className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             />
                         </div>
@@ -139,6 +137,7 @@ const AddProducts = () => {
                             </label>
                             <input
                                 type="number"
+                                placeholder='Available Product'
                                 {...register("availableProduct", { required: true })}
                                 className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             />
@@ -147,11 +146,32 @@ const AddProducts = () => {
                             <label className="text-gray-700 font-semibold">Price:</label>
                             <input
                                 type="number"
+                                placeholder='Price'
                                 {...register("price", { required: true })}
                                 className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             />
                         </div>
                     </div>
+
+                    <div className="mb-4 md:w-1/2">
+                        <label className="text-gray-700 font-semibold">
+                            Product Description:
+                        </label>
+                        <textarea {...register("description", { required: true })} placeholder="Product Description" className="textarea textarea-bordered textarea-lg w-full max-w-xs" ></textarea>
+                    </div>
+
+                    <div className="mb-4 md:w-full">
+                        <label className="text-gray-700 font-semibold">
+                            Discount:
+                        </label>
+                        <input
+                            type="number"
+                            {...register("discount", { required: true })}
+                            placeholder='Discount'
+                            className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        />
+                    </div>
+
                     <div>
                         <input
                             type="submit"

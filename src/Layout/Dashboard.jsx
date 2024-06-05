@@ -32,7 +32,7 @@ const Dashboard = () => {
                             </NavLink>
                         </li>
                         <li className="text-xl font-semibold">
-                            <NavLink to="/dashboard/AllProducts">
+                            <NavLink to="/dashboard/MyProducts">
                                 <FaRegPlusSquare />
                                 All Products
                             </NavLink>
