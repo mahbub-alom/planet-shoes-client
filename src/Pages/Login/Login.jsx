@@ -5,6 +5,7 @@ import { useState } from "react";
 import PageTitle from "../../Components/PageTitle";
 import SocialLogin from "../../Components/SocialLogin";
 import useAuth from "../../hook/useAuth";
+import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
@@ -43,6 +44,9 @@ const Login = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>Planet Shoes | Login</title>
+            </Helmet>
             <div className="">
                 <PageTitle
                     heading={"please login"}

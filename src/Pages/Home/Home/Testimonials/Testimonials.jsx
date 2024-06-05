@@ -14,7 +14,7 @@ import PageTitle from "../../../../Components/PageTitle";
 const Testimonials = () => {
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/reviews")
+        fetch("https://planet-shoes-server.onrender.com/reviews")
             .then((res) => res.json())
             .then((data) => setReviews(data));
     }, []);

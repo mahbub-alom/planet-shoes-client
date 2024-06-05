@@ -37,7 +37,7 @@ const UpdateUserInfo = () => {
     }
 
     const handleSwalFireWithUpdate = (userData) => {
-        axios.put(`http://localhost:5000/updateUser/${ids}`, userData, {
+        axios.put(`https://planet-shoes-server.onrender.com/updateUser/${ids}`, userData, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem("access-token")}`
             }

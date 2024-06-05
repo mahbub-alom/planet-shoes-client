@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { Zoom } from 'react-awesome-reveal';
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 
 const img_hosting_token = import.meta.env.VITE_IMGBB_KEY;
 
@@ -55,7 +56,7 @@ const AddProducts = () => {
     };
 
     const handleSwalFireWithUpdate = (productData) => {
-        axios.post("http://localhost:5000/addproduct", productData, {
+        axios.post("https://planet-shoes-server.onrender.com/addproduct", productData, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem("access-token")}`
             }
@@ -76,6 +77,9 @@ const AddProducts = () => {
 
     return (
         <>
+        <Helmet>
+            <title>Planet Shoes | AddProducts</title>
+        </Helmet>
             <Zoom>
                 <h1 className="text-2xl font-semibold text-fuchsia-500">Add A New Product</h1>
             </Zoom>

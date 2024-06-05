@@ -5,6 +5,7 @@ import axios from 'axios';
 import useAuth from '../../hook/useAuth';
 import { Link } from 'react-router-dom';
 import Btn from '../../Components/Btn';
+import { Helmet } from 'react-helmet-async';
 
 const UserInfo = () => {
 
@@ -13,7 +14,7 @@ const UserInfo = () => {
     const { isPending, data: singleUser = [], refetch } = useQuery({
         queryKey: ['singleUser'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/user?email=${user?.email}`,
+            const res = await axios.get(`https://planet-shoes-server.onrender.com/user?email=${user?.email}`,
                 {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("access-token")}`
@@ -32,6 +33,9 @@ const UserInfo = () => {
     return (
 
         <div className="overflow-x-auto w-full">
+            <Helmet>
+                <title>Planet Shoes | AddProducts</title>
+            </Helmet>
             <table className="table">
                 {/* head */}
                 <thead>

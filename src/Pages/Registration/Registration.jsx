@@ -7,6 +7,7 @@ import SocialLogin from "../../Components/SocialLogin";
 import useAuth from "../../hook/useAuth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Registration = () => {
         updateUserProfile(data?.name, data?.photoURL)
           .then(() => {
             const saveUser = { name: data.name, email: data.email, image: data.photoURL }
-            axios.post('http://localhost:5000/newUser', saveUser)
+            axios.post('https://planet-shoes-server.onrender.com/newUser', saveUser)
               .then(data => {
                 if (data?.data?.insertedId) {
                   navigate('/')
@@ -53,6 +54,9 @@ const Registration = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Planet Shoes | Registration</title>
+      </Helmet>
       <div className="">
         <PageTitle heading={"please registration"}></PageTitle>
       </div>

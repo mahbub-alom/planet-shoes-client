@@ -44,3 +44,6 @@ Planet Shoes aims to provide a seamless online shopping experience for shoe enth
 2. Open your browser and visit `http://localhost:5173`
 
 
+* Project live link: https://planet-shoes-12f8e.web.app/
+
+

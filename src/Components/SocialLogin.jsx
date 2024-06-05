@@ -16,7 +16,7 @@ const SocialLogin = () => {
         const loggedUser = result.user;
         console.log(loggedUser);
         const saveUser = { name: loggedUser.displayName, email: loggedUser.email, image: loggedUser.photoURL }
-        axios.post('http://localhost:5000/newUser', saveUser)
+        axios.post('https://planet-shoes-server.onrender.com/newUser', saveUser)
           .then(() => {
             navigate(from, { replace: true });
           })

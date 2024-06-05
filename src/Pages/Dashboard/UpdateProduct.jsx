@@ -40,7 +40,7 @@ const UpdateProduct = () => {
             })
     }
     const handleSwalFireWithUpdate = (productData) => {
-        axios.patch(`http://localhost:5000/updateproduct/${ids}`, productData, {
+        axios.patch(`https://planet-shoes-server.onrender.com/updateproduct/${ids}`, productData, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem("access-token")}`
             }

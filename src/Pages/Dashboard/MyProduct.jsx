@@ -6,17 +6,18 @@ import { Zoom } from 'react-awesome-reveal';
 import LoadingSpinner from '../Shared/LoadingSpinner/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const MyProduct = () => {
     const [searchText, setSearchText] = useState("");
-    const [product,setProduct]=useState([])
+    const [product, setProduct] = useState([])
     const { user } = useAuth();
 
 
     const { isPending, data: singleData = [], refetch } = useQuery({
         queryKey: ['singleData'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/getproduct?email=${user?.email}`,
+            const res = await axios.get(`https://planet-shoes-server.onrender.com/getproduct?email=${user?.email}`,
                 {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("access-token")}`
@@ -25,7 +26,7 @@ const MyProduct = () => {
             )
             setProduct(singleData)
             return res.data;
-            
+
         }
     })
     if (isPending) {
@@ -43,7 +44,7 @@ const MyProduct = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/deleteproduct/${item?._id}`, {
+                axios.delete(`https://planet-shoes-server.onrender.com/deleteproduct/${item?._id}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem("access-token")}`
                     }
@@ -63,7 +64,7 @@ const MyProduct = () => {
     }
 
     const handleSearch = () => {
-        axios.get(`http://localhost:5000/searchProduct/${searchText}`)
+        axios.get(`https://planet-shoes-server.onrender.com/searchProduct/${searchText}`)
             .then(data => {
                 setProduct(data.data)
             })
@@ -74,6 +75,9 @@ const MyProduct = () => {
 
 
         <div className="overflow-x-auto w-full">
+            <Helmet>
+                <title>Planet Shoes | MyProducts</title>
+            </Helmet>
             <Zoom>
                 <h1 className="text-2xl font-semibold text-center my-4 text-fuchsia-500">My Product</h1>
             </Zoom>

@@ -48,7 +48,7 @@ const router = createBrowserRouter([
       {
         path: "updateproduct/:id",
         element: <UpdateProduct />,
-        loader: ({ params }) => fetch(`http://localhost:5000/updateGetProduct/${params.id}`)
+        loader: ({ params }) => fetch(`https://planet-shoes-server.onrender.com/updateGetProduct/${params.id}`)
       },
       {
         path: "userInfo",
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       }, {
         path: "updateUserInfo/:id",
         element: <UpdateUserInfo />,
-        loader: ({ params }) => fetch(`http://localhost:5000/updateUserInfo/${params.id}`)
+        loader: ({ params }) => fetch(`https://planet-shoes-server.onrender.com/updateUserInfo/${params.id}`)
       }
     ]
   }

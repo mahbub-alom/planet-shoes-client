@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
       console.log(currentUser);
       const userData = { email: currentUser?.email }
       if (currentUser) {
-        axios.post('http://localhost:5000/jwt', userData)
+        axios.post('https://planet-shoes-server.onrender.com/jwt', userData)
           .then(data => {
             localStorage.setItem('access-token', data.data.token);
             setLoading(false);

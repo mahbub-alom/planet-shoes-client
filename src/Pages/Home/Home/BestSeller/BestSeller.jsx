@@ -6,7 +6,7 @@ import BestSellerCard from './BestSellerCard';
 const BestSeller = () => {
     const [seller, setSeller] = useState([])
 
-    axios.get("http://localhost:5000/bestseller")
+    axios.get("https://planet-shoes-server.onrender.com/bestseller")
         .then(data => {
             setSeller(data.data)
         })
